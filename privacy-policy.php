@@ -20,7 +20,7 @@ session_start();
         <div class="content-section">
             <div class="policy-content">
                 <p><strong>Effective Date:</strong> May 22, 2025</p>
-                <p>At TVC Twitch Song List ("we," "us," or "our"), we are committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website, <a href="https://www.tvcsonglist.com" class="policy-link">www.tvcsonglist.com</a>, or interact with our services.</p>
+                <p>At TVC Twitch Song List ("we," "us," or "our"), we are committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website, <a href="https://thatviolinchick.azurewebsites.net" class="policy-link">https://thatviolinchick.azurewebsites.net</a>, or interact with our services.</p>
                 
                 <h3>1. Information We Collect</h3>
                 <p>We may collect the following types of information:</p>
