@@ -20,7 +20,7 @@ session_start();
         <div class="content-section">
             <div class="policy-content">
                 <p><strong>Effective Date:</strong> May 22, 2025</p>
-                <p>Welcome to TVC Twitch Song List ("we," "us," or "our"). By accessing or using our website, <a href="https://www.tvcsonglist.com" class="policy-link">www.tvcsonglist.com</a>, you agree to be bound by these Terms of Service ("Terms"). If you do not agree, please do not use our website.</p>
+                <p>Welcome to TVC Twitch Song List ("we," "us," or "our"). By accessing or using our website, <a href="https://thatviolinchick.azurewebsites.net" class="policy-link">https://thatviolinchick.azurewebsites.net</a>, you agree to be bound by these Terms of Service ("Terms"). If you do not agree, please do not use our website.</p>
                 
                 <h3>1. Use of Our Website</h3>
                 <p>You agree to use our website for lawful purposes only. You may not:</p>
