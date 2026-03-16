@@ -27,7 +27,7 @@ try {
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     // Simple test query
-    $stmt = $pdo->query("SELECT 1 AS status");
+    $stmt = $pdo->query("SELECT count(*) AS active_songcount FROM youtube_videos WHERE status = 'active'");
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
     // If we got here → connection + query works
@@ -36,7 +36,7 @@ try {
         'status' => 'healthy',
         'database' => 'connected',
         'timestamp' => date('c'),
-        'test_result' => $result['status'] // should be 1
+        'active_songcount' => $result['active_songcount'] // should be 1
     ]);
 
 } catch (PDOException $e) {
