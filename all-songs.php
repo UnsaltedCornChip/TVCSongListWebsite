@@ -10,6 +10,27 @@ $pass = getenv('DB_PASS');
 $sslmode = 'require';
 $dsn = "pgsql:host=$host;dbname=$db;sslmode=$sslmode";
 
+function parseYouTubeVideoId($input) {
+    $input = trim($input);
+    if ($input === '') {
+        return false;
+    }
+
+    if (preg_match('/(?:youtube\.com\/(?:watch\?(?:.*&)?v=|embed\/|shorts\/)|youtu\.be\/)([A-Za-z0-9_-]{11})/i', $input, $matches)) {
+        return $matches[1];
+    }
+
+    if (preg_match('/[?&]v=([A-Za-z0-9_-]{11})/i', $input, $matches)) {
+        return $matches[1];
+    }
+
+    if (preg_match('/^([A-Za-z0-9_-]{11})$/', $input)) {
+        return $input;
+    }
+
+    return false;
+}
+
 try {
     $pdo = new PDO("$dsn", "$user", "$pass");
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -33,10 +54,16 @@ try {
               FROM youtube_videos 
               WHERE status = 'active'";
     $params = [];
-    
-    if ($search) {
+
+    $searchQuery = $search;
+    $parsedSearchId = parseYouTubeVideoId($search);
+    if ($parsedSearchId !== false && $parsedSearchId !== $search) {
+        $searchQuery = $parsedSearchId;
+    }
+
+    if ($searchQuery) {
         $query .= " AND (LOWER(title) LIKE LOWER(:search) OR LOWER(artist) LIKE LOWER(:search) OR LOWER(video_id) LIKE LOWER(:search))";
-        $params[':search'] = '%' . $search . '%';
+        $params[':search'] = '%' . $searchQuery . '%';
     }
     
     $query .= " ORDER BY title";
@@ -102,8 +129,8 @@ try {
         <div class="content-section">
             <form method="GET" action="all-songs.php" class="form-container">
                 <div class="form-group">
-                    <label for="search">Search by Title, Artist, or Video ID:</label>
-                    <input type="text" id="search" name="search" value="<?php echo htmlspecialchars($search); ?>" placeholder="Enter title, artist, or video ID">
+                    <label for="search">Search by Title, Artist, Video ID, or YouTube URL:</label>
+                    <input type="text" id="search" name="search" value="<?php echo htmlspecialchars($search); ?>" placeholder="Enter title, artist, video ID, or full YouTube URL">
                 </div>
                 <div class="form-group">
                     <label for="per_page">Results per page:</label>

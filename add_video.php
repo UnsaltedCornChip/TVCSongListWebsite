@@ -61,8 +61,8 @@ if (isset($_GET['status'])) {
             <?php endif; ?>
             <form action="add_video_to_db.php" method="POST" class="form-container">
                 <div class="form-group">
-                    <label for="video_id">YouTube Video ID:</label>
-                    <input type="text" id="video_id" name="video_id" required placeholder="e.g., dQw4w9WgXcQ">
+                    <label for="video_id">YouTube Video ID or URL:</label>
+                    <input type="text" id="video_id" name="video_id" required placeholder="e.g., dQw4w9WgXcQ or https://www.youtube.com/watch?v=dQw4w9WgXcQ">
                 </div>
                 <div class="form-group">
                     <label>Categories (optional):</label>

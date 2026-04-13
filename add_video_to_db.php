@@ -10,11 +10,33 @@ if (!isset($_SESSION['twitch_user']['is_streamer']) || !$_SESSION['twitch_user']
     }
 }
 
+function parseYouTubeVideoId($input) {
+    $input = trim($input);
+    if ($input === '') {
+        return false;
+    }
+
+    if (preg_match('/(?:youtube\.com\/(?:watch\?(?:.*&)?v=|embed\/|shorts\/)|youtu\.be\/)([A-Za-z0-9_-]{11})/i', $input, $matches)) {
+        return $matches[1];
+    }
+
+    if (preg_match('/[?&]v=([A-Za-z0-9_-]{11})/i', $input, $matches)) {
+        return $matches[1];
+    }
+
+    if (preg_match('/^([A-Za-z0-9_-]{11})$/', $input)) {
+        return $input;
+    }
+
+    return false;
+}
+
 $videoId = trim($_POST['video_id'] ?? '');
 $categories = $_POST['categories'] ?? []; // Optional categories array
 
+$videoId = parseYouTubeVideoId($videoId);
 if (!$videoId) {
-    header("Location: add_video.php?status=error&message=" . urlencode("No video ID provided."));
+    header("Location: add_video.php?status=error&message=" . urlencode("No valid YouTube video ID or URL provided."));
     exit;
 }
 
