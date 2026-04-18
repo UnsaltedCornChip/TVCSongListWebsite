@@ -2,4 +2,4 @@
 .azure/
 test/
 *.log
-commands_i_ran.txt
+commands_i_ran
