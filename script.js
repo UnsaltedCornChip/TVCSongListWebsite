@@ -80,4 +80,39 @@ document.addEventListener('DOMContentLoaded', () => {
             localStorage.setItem('resultsPerPage', perPageSelect.value);
         });
     }
+
+    // View toggle functionality
+    const tileViewBtn = document.querySelector('#tile-view-btn');
+    const listViewBtn = document.querySelector('#list-view-btn');
+    const videoList = document.querySelector('.video-list');
+
+    if (tileViewBtn && listViewBtn && videoList) {
+        // Set initial view from localStorage or default to tile
+        const savedView = localStorage.getItem('songView') || 'tile';
+        if (savedView === 'list') {
+            videoList.classList.add('list-view');
+            document.querySelectorAll('.video-item').forEach(item => item.classList.add('list-view'));
+            listViewBtn.classList.add('active');
+        } else {
+            tileViewBtn.classList.add('active');
+        }
+
+        // Toggle to tile view
+        tileViewBtn.addEventListener('click', () => {
+            videoList.classList.remove('list-view');
+            document.querySelectorAll('.video-item').forEach(item => item.classList.remove('list-view'));
+            tileViewBtn.classList.add('active');
+            listViewBtn.classList.remove('active');
+            localStorage.setItem('songView', 'tile');
+        });
+
+        // Toggle to list view
+        listViewBtn.addEventListener('click', () => {
+            videoList.classList.add('list-view');
+            document.querySelectorAll('.video-item').forEach(item => item.classList.add('list-view'));
+            listViewBtn.classList.add('active');
+            tileViewBtn.classList.remove('active');
+            localStorage.setItem('songView', 'list');
+        });
+    }
 });
