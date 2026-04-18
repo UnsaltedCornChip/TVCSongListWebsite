@@ -185,9 +185,25 @@ try {
                     <?php if ($page > 1): ?>
                         <a href="all-songs.php?search=<?php echo urlencode($search); ?>&per_page=<?php echo $per_page; ?>&page=<?php echo $page - 1; ?>" class="pagination-link">Previous</a>
                     <?php endif; ?>
-                    <?php for ($i = 1; $i <= $total_pages; $i++): ?>
-                        <a href="all-songs.php?search=<?php echo urlencode($search); ?>&per_page=<?php echo $per_page; ?>&page=<?php echo $i; ?>" class="pagination-link <?php echo $i == $page ? 'active' : ''; ?>"><?php echo $i; ?></a>
-                    <?php endfor; ?>
+                    <?php
+                    $range_start = max(1, $page - 10);
+                    $range_end = min($total_pages, $page + 10);
+                    if ($range_start > 1) {
+                        echo '<a href="all-songs.php?search=' . urlencode($search) . '&per_page=' . $per_page . '&page=1" class="pagination-link">1</a>';
+                        if ($range_start > 2) {
+                            echo '<span class="pagination-ellipsis">...</span>';
+                        }
+                    }
+                    for ($i = $range_start; $i <= $range_end; $i++) {
+                        echo '<a href="all-songs.php?search=' . urlencode($search) . '&per_page=' . $per_page . '&page=' . $i . '" class="pagination-link ' . ($i == $page ? 'active' : '') . '">' . $i . '</a>';
+                    }
+                    if ($range_end < $total_pages) {
+                        if ($range_end < $total_pages - 1) {
+                            echo '<span class="pagination-ellipsis">...</span>';
+                        }
+                        echo '<a href="all-songs.php?search=' . urlencode($search) . '&per_page=' . $per_page . '&page=' . $total_pages . '" class="pagination-link">' . $total_pages . '</a>';
+                    }
+                    ?>
                     <?php if ($page < $total_pages): ?>
                         <a href="all-songs.php?search=<?php echo urlencode($search); ?>&per_page=<?php echo $per_page; ?>&page=<?php echo $page + 1; ?>" class="pagination-link">Next</a>
                     <?php endif; ?>

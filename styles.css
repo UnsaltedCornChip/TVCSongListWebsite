@@ -514,6 +514,12 @@ body {
     cursor: default;
 }
 
+.pagination-ellipsis {
+    padding: 0.5rem 0.5rem;
+    color: var(--content-text);
+    font-size: 1rem;
+}
+
 /* Light mode text color overrides for video-item */
 .light-mode .video-item h4,
 .light-mode .video-item h4 a {
