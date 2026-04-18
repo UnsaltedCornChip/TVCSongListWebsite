@@ -90,7 +90,7 @@ try {
                     <?php foreach ($videos as $video): ?>
                         <div class="video-item">
                             <div class="video-details">
-                                <h4><?php echo htmlspecialchars($video['title']); ?></h4>
+                                <h4><a href="https://youtu.be/<?php echo htmlspecialchars($video['video_id']); ?>" target="_blank"><?php echo htmlspecialchars($video['title']); ?></a></h4>
                                 <p><strong>Artist:</strong> <?php echo htmlspecialchars($video['artist'] ?? 'Unknown'); ?></p>
                                 <p><strong>Duration:</strong> <?php echo sprintf('%02d:%02d', intdiv($video['length_seconds'], 60), $video['length_seconds'] % 60); ?></p>
                                 <p class="categories"><strong>Categories:</strong> <?php echo htmlspecialchars($video['categories'] ?? 'None'); ?></p>
