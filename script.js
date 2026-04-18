@@ -75,6 +75,12 @@ document.addEventListener('DOMContentLoaded', () => {
         const savedPerPage = localStorage.getItem('resultsPerPage') || '25';
         perPageSelect.value = savedPerPage;
 
+        // If the saved value differs from the current URL parameter, submit the form to apply it
+        const currentPerPage = new URLSearchParams(window.location.search).get('per_page') || '25';
+        if (perPageSelect.value !== currentPerPage) {
+            perPageSelect.form.submit();
+        }
+
         // Update localStorage when selection changes
         perPageSelect.addEventListener('change', () => {
             localStorage.setItem('resultsPerPage', perPageSelect.value);
